@@ -1,0 +1,9 @@
+.modal-header
+  %h5 Upload media
+.modal-body
+  %form{:action => '/medium', :method => 'POST', :enctype => "multipart/form-data"}
+    %input{:type => :file, :name => 'medium[medium]'}
+.modal-footer
+  .btn-group.pull-right
+    %button.btn.btn-primary{:type => 'submit', :event => {:action => 'submitUploadMedium'}} Upload
+    %a.btn{:href => '#', :event => {:action => 'cancelUploadMedium'}} Cancel

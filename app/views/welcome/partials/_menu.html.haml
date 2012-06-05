@@ -1,0 +1,15 @@
+%ul.nav.nav-list.well
+  %li.nav-header
+    Library
+  %script{:type => "text/x-handlebars"}
+    {{view Empl.ResetRestrictionsView media="Empl.mediumsController"}}
+  %script{:type => "text/x-handlebars"}
+    {{view Empl.NewUpoadMediaView}}
+  %li
+    :javascript
+      Empl.playlistsController.set('content', Empl.store.find(Empl.Playlist, {}))
+    %script{:type => "text/x-handlebars"}
+      {{view Empl.PlaylistsIndexView}}
+  %li.divider
+  %li
+    =link_to 'Sign out', sign_out_path

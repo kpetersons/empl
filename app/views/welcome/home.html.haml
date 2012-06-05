@@ -1,0 +1,11 @@
+:javascript
+  Empl.mediumsController.set('content', Empl.store.find(Empl.Medium, {}))
+.container-fluid
+  .row-fluid
+    .span2
+      =render :partial => 'welcome/partials/menu'
+    .span10
+      .well
+        =render :partial => 'welcome/partials/controls'
+        %hr
+        =render :partial => 'welcome/partials/index'

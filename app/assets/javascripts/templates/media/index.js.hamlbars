@@ -1,0 +1,14 @@
+%thead
+  %tr
+    %th.span1
+    %th
+      Artist
+    %th
+      Album
+    %th
+      Title
+    %th
+      Track number
+%tbody
+  =hb 'each showing_media' do
+    =hb 'view Empl.MediaIndexItemView mediumBinding="this"'

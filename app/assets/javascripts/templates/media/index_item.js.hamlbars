@@ -1,0 +1,17 @@
+%td.span1
+  =hb 'if medium.selected' do
+    %i.icon-check
+  =hb 'if medium.playing' do
+    %i.con-play-circle
+=hb 'unless medium.isMissingInfo' do
+  %td
+    =hb 'medium.artist'
+  %td
+    =hb 'medium.album'
+  %td
+    =hb 'medium.title'
+  %td
+    =hb 'medium.track_number'
+=hb 'if medium.isMissingInfo' do
+  %td{:colspan => 4}
+    =hb 'medium.medium_file_name'

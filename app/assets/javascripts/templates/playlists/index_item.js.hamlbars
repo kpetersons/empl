@@ -1,0 +1,2 @@
+%a{:href => '#', :event => {:action => 'selectActivePlaylist'}}
+  =hb 'playlist.name'

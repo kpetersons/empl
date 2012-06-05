@@ -1,0 +1,15 @@
+%form.form.form-horizontal{:action => '/playlists'}
+  %fieldset
+    %legend
+      .modal-header
+        %h5 Add to playlist
+    .modal-body
+      .control-group
+        .control-label
+          %label Playlist
+        .controls
+          =hb 'view Ember.Select name="playlist" contentBinding="Empl.playlistsController" optionLabelPath="content.name" optionValuePath="content.id" selectionBinding="playlist"'
+    .modal-footer
+      .btn-group.pull-right
+        %button.btn.btn-primary{:type => 'submit', :event => {:action => 'submitNewPlaylistMedia'}} Add
+        %a.btn{:href => '#', :event => {:action => 'cancelNewPlaylistMedia'}} Cancel

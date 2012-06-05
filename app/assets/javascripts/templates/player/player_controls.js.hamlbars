@@ -1,0 +1,36 @@
+.btn-toolbar
+  .btn-group
+    %a{:href => '#', 'data-toggle' => 'dropdown', :bind => {:class => 'areControlsDisabled:disabled :btn :btn-large :dropdown-toggle'}}
+      %i.icon-cog
+      %span.caret
+    =hb 'unless areControlsDisabled' do
+      %ul.dropdown-menu
+        %li
+          %a{:href => '#'}Details
+        %li
+          %a{:href => '#', :event => {:action => 'newAddToPlaylist'}}Add to playlist
+        %li
+          %a{:href => '#', :event => {:action => 'newRemoveFromPlaylist'}}Remove from playlist
+        %li.divider
+        %li
+          %a{:href => '#', :event => {:action => 'deleteMedia'}}Delete
+  .btn-group
+    .btn.btn-large{:event => {:action => 'stepBackwarddMedia'}}
+      %i.icon-step-backward
+    .btn.btn-large{:event => {:action => 'playMedia'}}
+      %i.icon-play
+    .btn.btn-large{:event => {:action => 'pauseMedia'}}
+      %i.icon-pause
+    .btn.btn-large{:event => {:action => 'stepForwardMedia'}}
+      %i.icon-step-forward
+  .btn-group
+    .offset1.progress.progress-striped.active.span3{:style => 'margin-bottom:9px;'}
+      .bar{:style => "width: 0%", :bind => {:style => 'medium.percent_played'}}
+%div
+  &nbsp;
+  Now playing:&nbsp;
+  =hb 'medium.timeleft'
+  =hb 'medium.artist'
+  =hb 'medium.title'
+  =hb 'medium.album'
+#audio

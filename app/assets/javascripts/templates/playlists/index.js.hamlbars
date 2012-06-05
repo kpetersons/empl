@@ -1,0 +1,5 @@
+%li.nav-header
+  Playlists
+=hb 'each playlists' do
+  =hb 'view Empl.PlaylistsIndexItemView playlistBinding="this"'
+=hb 'view Empl.NewPlaylistView'
