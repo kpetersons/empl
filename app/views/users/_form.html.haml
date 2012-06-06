@@ -1,0 +1,12 @@
+%fieldset
+  %legend Sign up
+  .control-group
+    .control-label
+      = form.label :email
+    .controls
+      = form.text_field :email, :type => "email"
+  .control-group
+    .control-label
+      = form.label :password
+    .controls
+      = form.password_field :password

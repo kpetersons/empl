@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %title Welcome
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+  %body
+    .container
+      .span12
+        .offset3.span4{:style => 'margin-top:15%;'}
+          = yield

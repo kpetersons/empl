@@ -1,0 +1,12 @@
+= form_for :password, :url => passwords_path, :html => {:class => 'form-horizontal'} do |form|
+  %fieldset
+    %legend Reset your password
+    %p
+      We will email you a link to reset your password.
+    .control-group
+      .control-label
+        = form.label :email, "Email address"
+      .controls
+        = form.text_field :email, :type => "email"
+    .form-actions
+      = form.submit "Reset password", :class => 'btn btn-primary pull-right'

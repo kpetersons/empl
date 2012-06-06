@@ -1,0 +1,12 @@
+= form_for(:user, :url  => user_password_path(@user, :token => @user.confirmation_token), :html => { :method => :put, :class => 'form-horizontal' }) do |form|
+  %fieldset
+    %legend Change your password
+  %p
+    Your password has been reset. Choose a new password below.
+  .control-group
+    .control-label
+      = form.label :password, "Choose password"
+    .controls
+      = form.password_field :password
+    .form-actions
+      = form.submit "Save this password", :class => 'btn btn-primary'

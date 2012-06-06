@@ -1,0 +1,4 @@
+= form_for @user, :html => {:class => 'form-horizontal'} do |form|
+  = render :partial => '/users/form', :object => form
+  .form-actions
+    = form.submit 'Sign up', :class => 'btn btn-primary pull-right'

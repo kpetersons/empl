@@ -1,0 +1,15 @@
+= form_for :session, :url => session_path, :html => {:class => 'form-horizontal'} do |form|
+  %fieldset
+    %legend Sign in
+    .control-group
+      .control-label
+        = form.label :email
+      .controls
+        = form.text_field :email, :type => "email"
+    .control-group
+      .control-label
+        = form.label :password
+      .controls
+        = form.password_field :password
+    .form-actions
+      = form.submit "Sign in", :class => 'btn btn-primary pull-right'
