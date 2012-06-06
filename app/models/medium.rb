@@ -32,7 +32,7 @@ class Medium < ActiveRecord::Base
     medium_infos_rel.each do |mi|
       ids<<mi.id
     end
-    return ids
+    ids
   end
 
   def medium_file_url
@@ -49,10 +49,10 @@ private
     path = medium.queued_for_write[:original].path
     open_opts = { :encoding => 'utf-8' }
     Mp3Info.open(path, open_opts) do |mp3info|
-      medium_infos<<MediumInfo.new({:attr_key => :title,  :attr_value => mp3info.tag.title})
-      medium_infos<<MediumInfo.new({:attr_key => :artist,  :attr_value => mp3info.tag.artist})
-      medium_infos<<MediumInfo.new({:attr_key => :album,  :attr_value => mp3info.tag.album})
-      medium_infos<<MediumInfo.new({:attr_key => :track_number,  :attr_value => mp3info.tag.tracknum})
+      medium_infos_rel<<MediumInfo.new({:attr_key => :title,  :attr_value => mp3info.tag.title})
+      medium_infos_rel<<MediumInfo.new({:attr_key => :artist,  :attr_value => mp3info.tag.artist})
+      medium_infos_rel<<MediumInfo.new({:attr_key => :album,  :attr_value => mp3info.tag.album})
+      medium_infos_rel<<MediumInfo.new({:attr_key => :track_number,  :attr_value => mp3info.tag.tracknum})
     end
   end
 

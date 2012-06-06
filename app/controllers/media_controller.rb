@@ -8,7 +8,7 @@ class MediaController < ApplicationController
       Medium.transaction do
         medium = current_user.media.new(params[:medium])
         medium.save
-        render :json => medium, :status => 200
+        render :json => medium, :status => :ok
       end
 
     end

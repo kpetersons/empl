@@ -1,7 +1,7 @@
 Empl.MediaIndexView = Ember.View.extend(
 
   tagName: 'table'
-  classNames: ['table', 'table-condensed']
+  classNames: ['table', 'table-condensed', 'media-table']
   templateName: 'templates/media/index'
   activePlaylistBinding: 'Empl.playlistsController.activePlaylist'
 
