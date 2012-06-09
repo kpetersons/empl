@@ -14,6 +14,7 @@ Empl.NewPlaylistFormView = Ember.View.extend(
   submitNewPlaylist: (e)->
     e.preventDefault()
     playlist = Empl.store.createRecord(Empl.Playlist, {name: @get('name')})
+    console.log 'tried to save and got return: ', playlist.error, playlist.errors, playlist.get('errors'), playlist.get('active'), playlist.isError, playlist.get('isError')
     Empl.store.commit()
     Empl.playlistsController.set('content', Empl.store.find(Empl.Playlist))
     @close()

@@ -13,9 +13,12 @@ class Playlist < ActiveRecord::Base
   attr_accessible :name
 
   has_many :playlist_media_rel, :class_name => 'PlaylistMedium'
+  validates :name, :presence => true
+  validates :name, :uniqueness => {:scope => :user_id}
+
 
   def as_json(options)
-    options = {:methods => [:playlist_media], :only => [:name, :id, :user_id]}.merge(options)
+    options = {:methods => [:playlist_media, :errors], :only => [:name, :id, :user_id]}.merge(options)
     super(options)
   end
 

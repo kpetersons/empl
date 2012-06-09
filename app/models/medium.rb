@@ -21,9 +21,10 @@ class Medium < ActiveRecord::Base
   has_many :playlist_mediums
 
   before_save :extract_metadata
+  validate :should_be_audio
 
   def as_json(options)
-    options = { :methods => [:medium_infos, :medium_file_url]}.merge(options)
+    options = { :methods => [:medium_infos, :medium_file_url, :errors]}.merge(options)
     super(options)
   end
 
@@ -39,7 +40,13 @@ class Medium < ActiveRecord::Base
     medium.url
   end
 
-private
+  private
+  def should_be_audio
+    unless audio?
+      errors.add(:medium, "should be audio file")
+    end
+  end
+
   def audio?
     medium_content_type =~ %r{^audio/(?:mp3|mpeg|mpeg3|mpg|x-mp3|x-mpeg|x-mpeg3|x-mpegaudio|x-mpg)$}
   end

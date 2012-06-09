@@ -4,11 +4,15 @@ class MediaController < ApplicationController
   respond_to :json, :html
 
   def create
-    if params[:medium][:medium].content_type.start_with? 'audio'
-      Medium.transaction do
-        medium = current_user.media.new(params[:medium])
-        medium.save
+    logger.debug "**********Params start**************"
+    logger.debug params
+    logger.debug "**********Params end**************"
+    Medium.transaction do
+      medium = current_user.media.new(params[:medium])
+      if medium.save
         render :json => medium, :status => :ok
+      else
+        render :json => medium, :status => :unprocessable_entity
       end
 
     end

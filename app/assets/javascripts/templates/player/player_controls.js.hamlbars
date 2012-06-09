@@ -15,13 +15,15 @@
         %li
           %a{:href => '#', :event => {:action => 'deleteMedia'}}Delete
   .btn-group
-    .btn.btn-large{:event => {:action => 'stepBackwarddMedia'}}
+    %div{:event => {:action => 'stepBackwardMedia'}, :bind => {:class => 'canNotStepBackward:disabled :btn :btn-large'}}
       %i.icon-step-backward
-    .btn.btn-large{:event => {:action => 'playMedia'}}
+    %div{:event => {:action => 'stopPlayMedia'}, :bind => {:class => 'canNotStopPlay:disabled :btn :btn-large'}}
+      %i.icon-stop
+    %div{:event => {:action => 'playMedia'}, :bind => {:class => 'canNotPlay:disabled :btn :btn-large'}}
       %i.icon-play
-    .btn.btn-large{:event => {:action => 'pauseMedia'}}
+    %div{:event => {:action => 'pauseMedia'}, :bind => {:class => 'canNotPause:disabled :btn :btn-large'}}
       %i.icon-pause
-    .btn.btn-large{:event => {:action => 'stepForwardMedia'}}
+    %div{:event => {:action => 'stepForwardMedia'}, :bind => {:class => 'canNotStepForward:disabled :btn :btn-large'}}
       %i.icon-step-forward
   .btn-group
     .offset1.progress.progress-striped.active.span3{:style => 'margin-bottom:9px;'}

@@ -8,6 +8,7 @@ Empl.Playlist = DS.Model.extend
   playlist_media:  DS.hasMany('Empl.PlaylistMedium')
 
   active:   false
+  errors:   null
 
   watchPlaylistMedia: (->
     console.log('Watching playlist media')

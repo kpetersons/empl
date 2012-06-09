@@ -8,12 +8,35 @@ Empl.PlayerControlsView = Ember.View.extend(
 
   isPlaying:(->
     return @get('media').get('isPlaying')
-  ).property('isPlaying')
+  ).property('media.isPlaying')
 
+  canNotStepForward: ( ->
+    return @get('canNotPause')
+  ).property('canNotPause')
+
+  canNotStepBackward: ( ->
+    return @get('canNotPause')
+  ).property('canNotPause')
+
+  canNotPlay: ( ->
+    @get('media').get('isPlaying') || !@get('media').get('isSelected')
+  ).property('media.isPlaying', 'media.isSelected')
+
+  canNotStopPlay: (->
+    !@get('media').get('isPlaying')
+  ).property('media.isPlaying')
+
+  canNotPause: ( ->
+    !@get('media').get('isPlaying')
+  ).property('media.isPlaying', 'media.isSelected')
 
   newAddToPlaylist: ->
     Empl.AddToPlaylistFormView.create().appendTo('body')
 
+  stopPlayMedia: ->
+    @togglePlay()
+    @get('media').clearFlagForAll('playing')
+    @set('medium', null)
 
   playMedia: ->
     playing = @get('medium')
@@ -35,22 +58,19 @@ Empl.PlayerControlsView = Ember.View.extend(
     @togglePlay()
 
   play: (media)->
+    @get('media').clearFlagForAll('playing')
+    media.set('playing', true)
     @set('medium', media)
-    $('#audio *').unbind()
-    $('#audio').find('audio').remove()
-    $('#audio').append @audio(media)
-    @bindControlEvents(media)
-    @setupTimer(media)
+    @resetPlayer()
+    @bindControlEvents()
+    @setupTimer()
     @togglePlay()
 
-  bindControlEvents: (media) ->
+  bindControlEvents: ->
+    media = @get('medium')
     $('#audio audio').bind 'play', ->
-      $("i.icon-play").addClass('disabled');
-      $("i.icon-pause").removeClass('disabled');
       media.setState('playing')
     .bind 'pause ended', ->
-      $("i.icon-pause").addClass('disabled')
-      $("i.icon-play").removeClass('disabled');
       media.setState('paused')
     .bind 'ended', ->
       media.setState('ended')
@@ -69,38 +89,37 @@ Empl.PlayerControlsView = Ember.View.extend(
     mins = Math.floor(rem/60,10)
     secs = rem - mins * 60
     timeleft = mins + ':' + (if secs > 9 then secs else '0' + secs)
-    @.get('medium').set('percent_played', 'width:' + ((a.currentTime / a.duration)*100) + '%')
-    @.get('medium').set('timeleft', timeleft)
+    @get('medium').set('percent_played', 'width:' + ((a.currentTime / a.duration)*100) + '%')
+    @get('medium').set('timeleft', timeleft)
 
-#      idx = Empl.mediaController.indexOf(_self.get('medium')) + 1
-#      if idx >= Empl.mediaController.content.length
-#        newMedia = Empl.mediaController.objectAt(0)
-#      else
-#        newMedia = Empl.mediaController.objectAt(idx)
-#      _self.set('medium', newMedia)
-#      _self.resetPlayer()
+  resetPlayer: ->
+    media = @get('medium')
+    $('#audio *').unbind()
+    $('#audio').find('audio').remove()
+    $('#audio').append @audio(media)
 
-
-#    $('#audio').find('#play_control').click ->
-#      _self.togglePlay()
-#    this.get('medium').set('percent_played', 'width:0%')
-#    this.get('medium').set('timeleft', '00:00')
-#    _self.togglePlay()
-#    window.setInterval ->
-#        _self.updateTimer()
-#      ,1000
-    return @
-
-#  resetPlayer: ->
-#    $('#audio *').unbind()
-#    this.startPlayer()
-#
   togglePlay: ->
     audio = $('#audio audio')
     if audio[0].paused
       audio[0].play()
     else
       audio[0].pause()
+
+  stepBackwardMedia: ->
+    list = @get('media').get('showing')
+    idx = list.indexOf(@get('medium')) - 1
+    if idx < 0
+      idx = list.length - 1
+    medium = list.objectAt idx
+    @play medium
+
+  stepForwardMedia: ->
+    list = @get('media').get('showing')
+    idx = list.indexOf(@get('medium')) + 1
+    if idx >= list.length
+      idx = 0
+    medium = list.objectAt idx
+    @play medium
 
 #
   audio: (media) ->

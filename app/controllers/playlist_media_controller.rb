@@ -5,8 +5,11 @@ class PlaylistMediaController < ApplicationController
 
   def create
     playlist_medium = PlaylistMedium.new(:playlist_id => playlist.id, :medium_id => params[:playlist_medium][:medium_id])
-    playlist_medium.save
-    render :json =>  {:playlist_medium => playlist_medium}
+    if playlist_medium.save
+      render :json =>  {:playlist_medium => playlist_medium}, :status => :ok
+    else
+      render :json =>  {:playlist_medium => playlist_medium}, :status => 500
+    end
   end
 
   def index

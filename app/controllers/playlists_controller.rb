@@ -5,8 +5,12 @@ class PlaylistsController < ApplicationController
 
   def create
     playlist = current_user.playlists.new(params[:playlist])
-    playlist.save
-    render :json =>  {:playlist => playlist}
+    if playlist.save
+      render :json =>  {:playlist => playlist}, :status => :ok
+    else
+      render :json =>  playlist, :status => :unprocessable_entity
+    end
+
   end
 
   def index

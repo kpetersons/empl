@@ -1,8 +1,10 @@
 %td.span1
   =hb 'if medium.selected' do
     %i.icon-check
+  =hb 'unless medium.selected' do
+    %i.icon-uncheck
   =hb 'if medium.playing' do
-    %i.con-play-circle
+    %i.icon-play-circle
 =hb 'unless medium.isMissingInfo' do
   %td
     =hb 'medium.artist'

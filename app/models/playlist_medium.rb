@@ -16,6 +16,11 @@ class PlaylistMedium < ActiveRecord::Base
 
   attr_accessible :playlist_id, :medium_id
 
+  validates :playlist_id, :presence => true
+  validates :medium_id, :presence => true
+  validates :medium_id, :uniqueness => {:scope => :playlist_id}
+
+
   def as_json(options)
     options = {:methods => [:medium], :only => [:id, :medium_id, :playlist_id]}.merge(options)
     super(options)
