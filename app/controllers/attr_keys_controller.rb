@@ -1,0 +1,2 @@
+class AttrKeysController < ApplicationController
+end

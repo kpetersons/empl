@@ -1,0 +1,14 @@
+.modal-header
+  %h5 Medium info
+.modal-body
+  %form{:action => '/medium-info', :method => 'POST', :class => 'form-horizontal'}
+    %fieldset
+      .control-group
+        .control-label
+          %label{:for => 'medium[medium]'} Choose files
+        .controls
+          %input{:type => :file, :name => 'medium[medium]', :multiple => true, :id => 'medium[medium]'}
+.modal-footer
+  .btn-group.pull-right
+    %button.btn.btn-primary{:type => 'submit', :event => {:action => 'submitUploadMedium'}} Upload
+    %a.btn{:href => '#', :event => {:action => 'cancelUploadMedium'}} Cancel

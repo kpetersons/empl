@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602164229) do
+ActiveRecord::Schema.define(:version => 20120611151748) do
+
+  create_table "attr_keys", :force => true do |t|
+    t.string   "name"
+    t.boolean  "grouping"
+    t.boolean  "fixed"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "media", :force => true do |t|
     t.integer  "user_id"
@@ -25,10 +33,10 @@ ActiveRecord::Schema.define(:version => 20120602164229) do
 
   create_table "medium_infos", :force => true do |t|
     t.integer  "medium_id"
-    t.string   "attr_key"
     t.string   "attr_value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "attr_keys_id"
   end
 
   create_table "playlist_media", :force => true do |t|
